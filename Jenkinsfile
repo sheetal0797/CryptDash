@@ -14,7 +14,7 @@ dockerhub=credentials('dockerhub')}
 		{
 			steps
 			{ 
-		
+		echo "maven"
 			}
 		}
 		stage("Build Docker Images")

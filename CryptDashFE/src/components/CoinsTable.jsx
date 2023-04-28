@@ -18,6 +18,8 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
+import {CSVLink} from 'react-csv';
+
 
 // import StarBorderIcon from "@material-ui/icons/StarBorder";
 // import StarIcon from "@material-ui/icons/Star";
@@ -113,8 +115,50 @@ export default function CoinsTable() {
   });
 
   
+const headers =[
+  {
+    label:"Id", key: "id"
+  },
+  {
+    label: "name", key:"name"
+  },
+  {
+    label:"price_change_percentage_24h",key:"price_change_percentage_24h"
+  },
+  {
+    label:"market_cap_change_percentage_24h",key:"market_cap_change_percentage_24h"
+  },
+  {
+    label:"market_cap_rank",key:"market_cap_rank"
+  },
+  {
+    label:"price_change_percentage_24h",key:"price_change_percentage_24h"
+  },
+  {
+    label:"total_supply",key:"total_supply"
+  },
+  {
+    label:"total_volume",key:"total_volume"
+  },
+  {
+    label:"high_24h",key:"high_24h"
+  },
+  {
+    label:"low_24h",key:"low_24h"
+  },
+
+
+]
+const csvLink={
+  filename:"file.csv",
+  headers:headers,
+  data:coins
+}
+
+  
   useEffect(() => {
     fetchCoins();
+    console.log(coins);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, myFav]);
 
@@ -155,6 +199,7 @@ export default function CoinsTable() {
         coin.name.toLowerCase().includes(search) ||
         coin.symbol.toLowerCase().includes(search)
     );
+
     }
 
     favlist = coins.filter(
@@ -169,6 +214,7 @@ export default function CoinsTable() {
       (coin) => watchlist.includes(coin.id.toLowerCase())
     );;
   };
+
 
   // const handleFavorite = () => {
 
@@ -301,6 +347,8 @@ export default function CoinsTable() {
   return (
     <ThemeProvider theme={darkTheme}>
       <Container style={{ textAlign: "center" }}>
+          <CSVLink {...csvLink}> export to csv</CSVLink>
+        
         <Typography
           variant="h4"
           style={{ margin: 18, fontFamily: "Montserrat" }}

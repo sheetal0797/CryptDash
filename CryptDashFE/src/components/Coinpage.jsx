@@ -129,26 +129,6 @@ const CoinPage = () => {
             console.log("nothing in watchlist");
           }
       })
-  
-    // const coinRef = doc(db, "watchlist", user.uid);
-    // try {
-    //   await setDoc(
-    //     coinRef,
-    //     { coins: watchlist ? [...watchlist, coin?.id] : [coin?.id] },
-    //     { merge: true }
-    //   );
-    //   setAlert({
-    //     open: true,
-    //     message: `${coin.name} Added to the Watchlist !`,
-    //     type: "success",
-    //   });
-    // } catch (error) {
-    //   setAlert({
-    //     open: true,
-    //     message: error.message,
-    //     type: "error",
-    //   });
-    // }
   };
 
   const removeFromWatchlist = async () => {
@@ -200,30 +180,6 @@ const CoinPage = () => {
             console.log("nothing in watchlist");
           }
       })
-
-
-
-
-    // const coinRef = doc(db, "watchlist", user.uid);
-    // try {
-    //   await setDoc(
-    //     coinRef,
-    //     { coins: watchlist.filter((wish) => wish !== coin?.id) },
-    //     { merge: true }
-    //   );
-
-    //   setAlert({
-    //     open: true,
-    //     message: `${coin.name} Removed from the Watchlist !`,
-    //     type: "success",
-    //   });
-    // } catch (error) {
-    //   setAlert({
-    //     open: true,
-    //     message: error.message,
-    //     type: "error",
-    //   });
-    // }
   };
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 

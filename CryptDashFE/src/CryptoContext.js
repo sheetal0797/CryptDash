@@ -20,6 +20,7 @@ const CryptoContext = ({ children }) => {
     type:'success'
   });
   const [watchlist, setWatchlist]=useState([]);
+  const [myFav, setmyFav] = useState(false);
 
   useEffect(()=>{
     if(user){
@@ -112,7 +113,7 @@ const CryptoContext = ({ children }) => {
   }, [currency]);
 
   return (
-    <Crypto.Provider value={{ currency, setCurrency, symbol,coins,loading,fetchCoins, alert,setAlert,user, setUser,watchlist, setWatchlist,}}>
+    <Crypto.Provider value={{ currency, setCurrency, symbol,coins,loading,fetchCoins, alert,setAlert,user, setUser,watchlist, setWatchlist, myFav, setmyFav}}>
       {children}
     </Crypto.Provider>
   );

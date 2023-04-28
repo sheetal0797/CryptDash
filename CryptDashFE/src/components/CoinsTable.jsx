@@ -29,10 +29,52 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import {Button} from "@material-ui/core";
+import {CSVLink} from 'react-csv';
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+const headers =[
+  {
+    label:"Id", key: "id"
+  },
+  {
+    label: "name", key:"name"
+  },
+  {
+    label:"price_change_percentage_24h",key:"price_change_percentage_24h"
+  },
+  {
+    label:"market_cap_change_percentage_24h",key:"market_cap_change_percentage_24h"
+  },
+  {
+    label:"market_cap_rank",key:"market_cap_rank"
+  },
+  {
+    label:"price_change_percentage_24h",key:"price_change_percentage_24h"
+  },
+  {
+    label:"total_supply",key:"total_supply"
+  },
+  {
+    label:"total_volume",key:"total_volume"
+  },
+  {
+    label:"high_24h",key:"high_24h"
+  },
+  {
+    label:"low_24h",key:"low_24h"
+  },
+
+]
+
+let favlist = [];
+let csvLink={
+  filename:"file.csv",
+  headers:headers,
+  data: favlist
 }
 
 export default function CoinsTable() {
@@ -40,7 +82,7 @@ export default function CoinsTable() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { currency, symbol,coins,loading ,fetchCoins} = CryptoState();
+  const { currency, symbol,coins,loading ,fetchCoins, watchlist, setWatchlist, user, setAlert, myFav, setmyFav} = CryptoState();
 
   const useStyles = makeStyles({
     row: {
@@ -74,15 +116,187 @@ export default function CoinsTable() {
   useEffect(() => {
     fetchCoins();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currency]);
+  }, [currency, myFav]);
+
+
+
+
+  const setmyFavorite = async () => {
+    // setWatchlist(watchlist);
+    console.log("setmyFav");
+    console.log(myFav);
+    if(myFav){
+      setmyFav(false);
+    }
+    else{
+    setmyFav(true);
+    }
+
+  };
 
   const handleSearch = () => {
-    return coins.filter(
+    console.log("handleSearch");
+    console.log(myFav);
+    if(!myFav)
+    {
+    
+      favlist = coins.filter(
+        (coin) =>
+          coin.name.toLowerCase().includes(search) ||
+          coin.symbol.toLowerCase().includes(search)
+      );
+      csvLink={
+        filename:"AllCoins.csv",
+        headers:headers,
+        data: favlist
+      }
+      return coins.filter(
       (coin) =>
         coin.name.toLowerCase().includes(search) ||
         coin.symbol.toLowerCase().includes(search)
     );
+    }
+
+    favlist = coins.filter(
+      (coin) => watchlist.includes(coin.id.toLowerCase())
+    );
+    csvLink={
+      filename:"FavCoins.csv",
+      headers:headers,
+      data: favlist
+    }
+    return coins.filter(
+      (coin) => watchlist.includes(coin.id.toLowerCase())
+    );;
   };
+
+  // const handleFavorite = () => {
+
+  //   return coins.filter(
+  //     (coin) => watchlist.includes(coin.id.toLowerCase())
+  //   );
+  // };
+
+  // const showTable = () => {
+  //   if(!myFav)
+  //   {
+  //     return handleSearch();
+  //   }
+  //   else
+  //   {
+  //     return handleFavorite();
+  //   }
+  // }
+
+  async function handleCheckboxClick(e, coin)
+  {
+    console.log(e.target.checked);
+
+    if(!e.target.checked) {
+      const newWatchlist = watchlist.filter((wish) => wish !== coin?.id)
+      console.log(newWatchlist);
+  
+      fetch("http://localhost:5000/setwatchlist", {
+        method:"POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          email: user,
+          newwatchlist: newWatchlist,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAlert({
+            open: true,
+            message: `${coin.name} Removed from the Watchlist !`,
+            type: "success",
+          });
+          })
+  
+      fetch("http://localhost:5000/getwatchlist", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          email:user,
+        }),      
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.watchlist){
+            setWatchlist(data.watchlist);
+            }
+            else
+            {
+              console.log("nothing in watchlist");
+            }
+        })
+  
+    }
+    else {
+      const newWatchlist = watchlist ? [...watchlist, coin?.id] : [coin?.id];
+
+      console.log(newWatchlist);
+  
+      fetch("http://localhost:5000/setwatchlist", {
+        method:"POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          email: user,
+          newwatchlist: newWatchlist,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAlert({
+            open: true,
+            message: `${coin.name} Added to the Watchlist !`,
+            type: "success",
+          });
+        })
+  
+      fetch("http://localhost:5000/getwatchlist", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          email:user,
+        }),      
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.watchlist){
+            setWatchlist(data.watchlist);
+            }
+            else
+            {
+              console.log("nothing in watchlist");
+            }
+        })
+  
+    }
+
+    e.stopPropagation();
+
+  }
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -93,6 +307,27 @@ export default function CoinsTable() {
         >
           Cryptocurrency Prices by Market Cap
         </Typography>
+        {/* <Button
+          onClick={myFav = true}
+        >
+          My Watchlist
+        </Button> */}
+        <CSVLink  {...csvLink}> Download </CSVLink>
+
+        <Button
+            variant='outlined'
+            style={{
+              width:'100%',
+              height:40,
+              backgroundColor:myFav?'#ff0000':'#EEBC1D',
+            }}
+            onClick={setmyFavorite}
+            >
+               {myFav ? "Show All Coins" : "Show My Watchlist"}
+        </Button>
+
+
+
         <TextField
           label="Search For a Crypto Currency.."
           variant="outlined"
@@ -123,10 +358,12 @@ export default function CoinsTable() {
               </TableHead>
 
               <TableBody>
-                {handleSearch()
+                  {handleSearch()
                   .slice((page - 1) * 10, (page - 1) * 10 + 10)
                   .map((row) => {
                     const profit = row.price_change_percentage_24h > 0;
+                    const isFavorite = watchlist.includes(row.id);
+
                     return (
                       <TableRow
                         onClick={() => history.push(`/coins/${row.id}`)}
@@ -134,7 +371,9 @@ export default function CoinsTable() {
                         key={row.name}
                       >
                         <TableCell>
-                          <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>} name="checkedH"/>
+                          <Checkbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>} name="checkedH" 
+                          checked={isFavorite}
+                          onClick={(e) => handleCheckboxClick(e, row)}/>
                         </TableCell>
 
                         <TableCell

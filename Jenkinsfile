@@ -73,11 +73,12 @@ dockerhub=credentials('dockerhub')}
 				sh "docker push sheetalagarwal/cryptdash_server"	
 			}
 		}
-		stage("Clean Docker Images")
+		stage("Removing Docker Images from Local")
 		{
 			steps
-			{ echo "Postt Actions Stage"
-				// sh "docker rmi sheetalagarwal/cryptdash_server"	
+			{ 	echo "Postt Actions Stage"
+				sh "docker rmi sheetalagarwal/cryptdash_server"
+				sh "docker rmi sheetalagarwal/cryptdash_client"	
 				}
 		}
 		stage("Deploy and Run Images")

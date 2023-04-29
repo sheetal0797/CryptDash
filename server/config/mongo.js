@@ -8,7 +8,9 @@ const mongoOpts = {
 };
 
 const mongoConfig = {
-    url: `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+    // url: `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+    url: `mongodb://mongo/${process.env.DB_NAME}`,
+
     configs: mongoOpts,
 }
 

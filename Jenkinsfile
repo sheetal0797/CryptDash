@@ -62,7 +62,7 @@ dockerhub=credentials('dockerhub')}
 			steps
 			
 			{ 	echo "Push Beckend Docker Image to Docker Hub"
-				sh "docker push sheetalagarwal/cryptdash_client"	
+				sh "docker push sheetalagarwal/cryptdash_server"	
 			}
 		}
 		stage("Push Frontend Docker Image to Docker Hub")
@@ -70,7 +70,7 @@ dockerhub=credentials('dockerhub')}
 			steps
 			
 			{ 	echo "Push frontend Docker Image to Docker Hub"
-				sh "docker push sheetalagarwal/cryptdash_server"	
+				sh "docker push sheetalagarwal/cryptdash_client"	
 			}
 		}
 		stage("Removing Docker Images from Local")

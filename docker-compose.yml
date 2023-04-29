@@ -4,7 +4,6 @@ services:
     image: sheetalagarwal/cryptdash_server
     container_name: cryptdash_server
     restart: always
-    stdin_open: true
     ports:
       - "5000:5000"
     links:

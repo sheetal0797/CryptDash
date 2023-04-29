@@ -3,7 +3,7 @@ services:
   server:
     image: sheetalagarwal/cryptdash_server
     container_name: cryptdash_server
-    restart: always
+    # restart: always
     ports:
       - "5000:5000"
     links:
@@ -13,7 +13,7 @@ services:
   client:
     image: sheetalagarwal/cryptdash_client
     container_name: cryptdash_client
-    restart: always
+    # restart: always
     ports:
       - "3000:3000"
     volumes:

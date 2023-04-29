@@ -12,6 +12,10 @@
     - name: Pull the Docker images specifed in docker-compose
       command: docker-compose pull
 
+    - name: remove container if exists
+      shell: docker rm cryptdash_server cryptdash_client mongo 
+      when: result.exists  
+
     - name: Create containers for the pulled Docker images
       command: docker-compose up --no-start
 

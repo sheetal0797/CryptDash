@@ -49,21 +49,35 @@ dockerhub=credentials('dockerhub')}
 			}
 			// { sh "docker build -t sheetalagarwal/devops_pipeline_scical_img ."	}
 		}
-		stage("Publish Docker Images")
+		stage("Login to Docker Hub")
+		{
+			steps
+			{
+				sh "docker logout"
+				sh "echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin"
+			}
+		}
+		stage("Push Beckend Docker Image to Docker Hub")
 		{
 			steps
 			
-			{ echo "Postt Actions Stage"
-			// sh "docker logout"
-			//   sh "echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin"
-// sh "docker push sheetalagarwal/devops_pipeline_scical_img"	
-}
+			{ 	echo "Push Beckend Docker Image to Docker Hub"
+				sh "docker push sheetalagarwal/cryptdash_client"	
+			}
+		}
+		stage("Push Frontend Docker Image to Docker Hub")
+		{
+			steps
+			
+			{ 	echo "Push frontend Docker Image to Docker Hub"
+				sh "docker push sheetalagarwal/cryptdash_server"	
+			}
 		}
 		stage("Clean Docker Images")
 		{
 			steps
 			{ echo "Postt Actions Stage"
-				// sh "docker rmi sheetalagarwal/devops_pipeline_scical_img"	
+				// sh "docker rmi sheetalagarwal/cryptdash_server"	
 				}
 		}
 		stage("Deploy and Run Images")

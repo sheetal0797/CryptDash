@@ -1,0 +1,36 @@
+version: "2"
+services:
+  server:
+    image: sheetalagarwal/cryptdash_server
+    container_name: cryptdash_server
+    restart: always
+    stdin_open: true
+    ports:
+      - "5000:5000"
+    links:
+      - mongo
+    networks:
+      cryptdash:
+        ipv4_address: 172.16.144.77
+    volumes:
+      - ./server:/usr/src/app
+  client:
+    image: sheetalagarwal/cryptdash_client
+    container_name: cryptdash_client
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+    networks:
+      cryptdash:
+        ipv4_address: 172.16.144.77
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - data:/data/db
+    ports:
+      - "27017:27017"
+volumes:
+  data:

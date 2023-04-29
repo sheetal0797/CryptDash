@@ -9,9 +9,6 @@ services:
       - "5000:5000"
     links:
       - mongo
-    networks:
-      cryptdash:
-        ipv4_address: 172.16.144.77
     volumes:
       - ./server:/usr/src/app
   client:
@@ -22,9 +19,6 @@ services:
       - "3000:3000"
     volumes:
       - ./client:/usr/src/app
-    networks:
-      cryptdash:
-        ipv4_address: 172.16.144.77
   mongo:
     container_name: mongo
     image: mongo

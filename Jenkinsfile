@@ -17,10 +17,36 @@ dockerhub=credentials('dockerhub')}
 		echo "maven"
 			}
 		}
-		stage("Build Docker Images")
+		stage("Running React Tests (Jest)")
+	 	{
+			steps
+			{
+				echo "running react tests (jest)"
+			}
+		}
+		stage("Running API Tests (supertest)")
 		{
 			steps
-			{echo "Postt Actions Stage"}
+			{
+				echo "running API tests (supertest)"
+			}
+		}
+		stage("Build CryptDash Backend Docker Image")
+		{
+			steps
+			{
+				echo "build cryptdash backend docker Image"
+				sh "docker build -t sheetalagarwal/cryptdash_server server/"
+			}
+			// { sh "docker build -t sheetalagarwal/devops_pipeline_scical_img ."	}
+		}
+		stage("Build CryptDash Frontend Docker Image")
+		{
+			steps
+			{
+				echo "build cryptdash frontend docker Image"
+				sh "docker build -t sheetalagarwal/cryptdash_client client/"
+			}
 			// { sh "docker build -t sheetalagarwal/devops_pipeline_scical_img ."	}
 		}
 		stage("Publish Docker Images")

@@ -18,14 +18,7 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
-
-
-// import StarBorderIcon from "@material-ui/icons/StarBorder";
-// import StarIcon from "@material-ui/icons/Star";
-// import DeleteIcon from "@material-ui/icons/Delete";
-// import Icon from "@material-ui/core/Icon";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -113,16 +106,10 @@ export default function CoinsTable() {
     },
   });
 
-  
-  
   useEffect(() => {
     fetchCoins();
     console.log(coins);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currency, myFav]);
-
-
-
 
   const setmyFavorite = async () => {
     // setWatchlist(watchlist);

@@ -1,0 +1,33 @@
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","bitcoin","solana","cardano","binancecoin"]},"level":"info","message":"API request","method":"POST","path":"/setwatchlist","query":{}}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","bitcoin","solana","cardano","binancecoin"]},"level":"info","message":"API request setwatchlist api called","method":"POST","path":"/setwatchlist"}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}
+{"level":"info","message":"API response","method":"POST","path":"/setwatchlist","status":200}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","bitcoin","solana","cardano","binancecoin"]},"level":"info","message":"API request","method":"POST","path":"/setwatchlist","query":{}}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","bitcoin","solana","cardano","binancecoin"]},"level":"info","message":"API request setwatchlist api called","method":"POST","path":"/setwatchlist"}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/setwatchlist","status":200}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano","binancecoin"]},"level":"info","message":"API request","method":"POST","path":"/setwatchlist","query":{}}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano","binancecoin"]},"level":"info","message":"API request setwatchlist api called","method":"POST","path":"/setwatchlist"}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}
+{"level":"info","message":"API response","method":"POST","path":"/setwatchlist","status":200}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano","binancecoin"]},"level":"info","message":"API request","method":"POST","path":"/setwatchlist","query":{}}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano","binancecoin"]},"level":"info","message":"API request setwatchlist api called","method":"POST","path":"/setwatchlist"}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/setwatchlist","status":200}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano"]},"level":"info","message":"API request","method":"POST","path":"/setwatchlist","query":{}}
+{"body":{"email":"asdf@asdf","newwatchlist":["usd-coin","solana","cardano"]},"level":"info","message":"API request setwatchlist api called","method":"POST","path":"/setwatchlist"}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request","method":"POST","path":"/getwatchlist","query":{}}
+{"body":{"email":"asdf@asdf"},"level":"info","message":"API request getwatchlist api called","method":"POST","path":"/getwatchlist"}
+{"level":"info","message":"API response","method":"POST","path":"/setwatchlist","status":200}
+{"level":"info","message":"API response","method":"POST","path":"/getwatchlist","status":200}

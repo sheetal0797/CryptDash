@@ -8,6 +8,22 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 const bcrypt=require("bcryptjs");
+const winston = require('winston');
+const {ElasticsearchTransport} = require('winston-elasticsearch');
+
+const logger = winston.createLogger({
+    level: 'info',
+    transports: [
+        new winston.transports.File({filename: 'application.log'}),
+        // new ElasticsearchTransport({
+        //     level: 'info,',
+        //     index: 'log',
+        //     clientOpts: {
+        //         node: 'http://localhost:9200/',
+        //     },
+        // }),
+    ],
+});
 
 
 dotenv.config({path:'.env'});
@@ -38,10 +54,38 @@ require("./userDetails");
 
 const User = mongoose.model("UserInfo");
 
+app.use((req, res, next) => {
+    logger.info({
+      message: "API request",
+      method: req.method,
+      path: req.path,
+      query: req.query,
+      body: req.body
+    });
+  
+    res.on("finish", () => {
+      logger.info({
+        message: "API response",
+        method: req.method,
+        path: req.path,
+        status: res.statusCode
+      });
+    });
+  
+    next();
+  });
+
 
 app.post("/login-user", async(req, res)=>{
+    logger.info({
+        message: "API request login-user api called",
+        method: req.method,
+        path: req.path,
+        body: req.body
+    });
+
     const {email, password} = req.body;
-    console.log(email);
+    // console.log(email);
     const user = await User.findOne({email});
     if(!user){
         return res.json({error: "User Not Found"});
@@ -62,6 +106,12 @@ app.post("/login-user", async(req, res)=>{
 });
 
 app.post("/register", async(req, res)=>{
+    logger.info({
+        message: "API request register api called",
+        method: req.method,
+        path: req.path,
+        body: req.body
+    });
     const {email, password} = req.body;
 
     const encryptedPassword=await bcrypt.hash(password, 10);
@@ -75,13 +125,19 @@ app.post("/register", async(req, res)=>{
             email:email,
             password:encryptedPassword,
         });
-        res.send({status:"ok"});
+        res.status(201).send({email: email});
     } catch(error){
         res.send({error:"Error while signing up"})
     }
 });
 
 app.post("/userData", async (req, res)=> {
+    logger.info({
+        message: "API request userData api called",
+        method: req.method,
+        path: req.path,
+        body: req.body
+    });
     const {token} = req.body;
     try{
         const user = jwt.verify(token, JWT_SECRET, (err, res) => {
@@ -90,7 +146,7 @@ app.post("/userData", async (req, res)=> {
             }
             return res;
         });
-        console.log(user);
+        // console.log(user);
         if(user=="token expired"){
             return res.send({status:"error", data: "token expired"});
         }
@@ -109,11 +165,17 @@ app.post("/userData", async (req, res)=> {
 
 
 app.post("/getwatchlist", async (req,res) => {
+    logger.info({
+        message: "API request getwatchlist api called",
+        method: req.method,
+        path: req.path,
+        body: req.body
+    });
     const {email} = req.body;
     const user = await User.findOne({email});
 
-    console.log(user);
-    console.log(email);
+    // console.log(user);
+    // console.log(email);
     if(user.watchlist){
         return res.json({status:"ok", watchlist: user.watchlist});
     }
@@ -123,10 +185,16 @@ app.post("/getwatchlist", async (req,res) => {
 });
 
 app.post("/setwatchlist", async (req,res) => {
+    logger.info({
+        message: "API request setwatchlist api called",
+        method: req.method,
+        path: req.path,
+        body: req.body
+    });
     const {email, newwatchlist} = req.body;
     // const user = await User.findOne({email});
     // const newwatchlist = watchlist;
-    console.log(newwatchlist);
+    // console.log(newwatchlist);
     await User.findOneAndUpdate({email},
         {watchlist: newwatchlist}
     );
@@ -141,3 +209,4 @@ app.post("/setwatchlist", async (req,res) => {
     // }
 });
 
+module.exports = app

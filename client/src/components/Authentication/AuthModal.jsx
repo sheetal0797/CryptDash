@@ -7,9 +7,6 @@ import Signup from "./Signup";
 import Login from "./Login";
 import { useState } from "react";
 import { CryptoState } from "../../CryptoContext";
-import { auth } from "../../firebase";
-import GoogleButton from "react-google-button";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -53,30 +50,6 @@ export default function AuthModal() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const googleProvider = new GoogleAuthProvider();
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((res) => {
-        setAlert({
-          open: true,
-          message: `Sign Up Successful. Welcome ${res.user.email}`,
-          type: "success",
-        });
-
-        handleClose();
-      })
-      .catch((error) => {
-        setAlert({
-          open: true,
-          message: error.message,
-          type: "error",
-        });
-        return;
-      });
-  };
-
   return (
     <div>
       <Button
@@ -85,7 +58,7 @@ export default function AuthModal() {
           width: 85,
           height: 40,
           marginLeft: 15,
-          backgroundColor: "#EEBC1D",
+          backgroundColor: "#9df9ef",
         }}
         onClick={handleOpen}
       >
@@ -124,13 +97,6 @@ export default function AuthModal() {
             </AppBar>
             {value === 0 && <Login handleClose={handleClose} />}
             {value === 1 && <Signup handleClose={handleClose} />}
-            {/* <Box className={classes.google}>
-              <span>OR</span>
-              <GoogleButton
-                style={{ width: "100%", outline: "none" }}
-                onClick={signInWithGoogle}
-              />
-            </Box> */}
           </div>
         </Fade>
       </Modal>

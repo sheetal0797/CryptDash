@@ -19,7 +19,7 @@ import UserSidebar from "./Authentication/UserSidebar";
 const useStyles = makeStyles((theme) => ({
   title: {
     flex: 1,
-    color: "gold",
+    color: "#9df9ef",
     fontFamily: "Montserrat",
     fontWeight: "bold",
     cursor: "pointer",
@@ -58,9 +58,8 @@ function Header() {
               variant="h6"
               className={classes.title}
             >
-              CoinRush
+              CryptDash
             </Typography>
-            {/* <Button color="inherit">Login</Button> */}
             <Select
               variant="outlined"
               labelId="demo-simple-select-label"

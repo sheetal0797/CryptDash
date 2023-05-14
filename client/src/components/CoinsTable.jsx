@@ -18,10 +18,8 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import {Button} from "@material-ui/core";
 import {CSVLink} from 'react-csv';
@@ -89,7 +87,7 @@ export default function CoinsTable() {
     },
     pagination: {
       "& .MuiPaginationItem-root": {
-        color: "gold",
+        color: "#9df9ef",
       },
     },
   });
@@ -100,7 +98,7 @@ export default function CoinsTable() {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#fff",
+        main: "#000000",
       },
       type: "dark",
     },
@@ -112,7 +110,6 @@ export default function CoinsTable() {
   }, [currency, myFav]);
 
   const setmyFavorite = async () => {
-    // setWatchlist(watchlist);
     console.log("setmyFav");
     console.log(myFav);
     if(myFav){
@@ -159,25 +156,6 @@ export default function CoinsTable() {
       (coin) => watchlist.includes(coin.id.toLowerCase())
     );
   };
-
-
-  // const handleFavorite = () => {
-
-  //   return coins.filter(
-  //     (coin) => watchlist.includes(coin.id.toLowerCase())
-  //   );
-  // };
-
-  // const showTable = () => {
-  //   if(!myFav)
-  //   {
-  //     return handleSearch();
-  //   }
-  //   else
-  //   {
-  //     return handleFavorite();
-  //   }
-  // }
 
   async function handleCheckboxClick(e, coin)
   {
@@ -307,7 +285,7 @@ export default function CoinsTable() {
             style={{
               width:'100%',
               height:40,
-              backgroundColor:myFav?'#ff0000':'#EEBC1D',
+              backgroundColor:myFav?'#ff0000':'#9df9ef',
             }}
             onClick={setmyFavorite}
             >
@@ -324,10 +302,10 @@ export default function CoinsTable() {
         />
         <TableContainer component={Paper}>
           {loading ? (
-            <LinearProgress style={{ backgroundColor: "gold" }} />
+            <LinearProgress style={{ backgroundColor: "#9df9ef" }} />
           ) : (
             <Table aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#EEBC1D" }}>
+              <TableHead style={{ backgroundColor: "#9df9ef" }}>
                 <TableRow>
                   {["Favourites", "Coin", "Price", "24h Change", "Market Cap"].map((head) => (
                     <TableCell
@@ -423,7 +401,6 @@ export default function CoinsTable() {
           )}
         </TableContainer>
 
-        {/* Comes from @material-ui/lab */}
         <Pagination
           count={(handleSearch()?.length / 10).toFixed(0)}
           style={{

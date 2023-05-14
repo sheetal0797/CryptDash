@@ -7,8 +7,6 @@ import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
 import { numberWithCommas } from "../components/CoinsTable";
 import { CryptoState } from "../CryptoContext";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase";
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -181,7 +179,7 @@ const CoinPage = () => {
           }
       })
   };
-  if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }} />;
+  if (!coin) return <LinearProgress style={{ backgroundColor: "#9df9ef" }} />;
 
   return (
     <div className={classes.container}>
@@ -257,7 +255,7 @@ const CoinPage = () => {
             style={{
               width:'100%',
               height:40,
-              backgroundColor:inWatchlist?'#ff0000': '#EEBC1D',
+              backgroundColor:inWatchlist?'#ff0000': '#9df9ef',
             }}
             onClick={inWatchlist? removeFromWatchlist: addToWatchlist}
             >

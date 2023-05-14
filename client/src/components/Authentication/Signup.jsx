@@ -1,9 +1,6 @@
 import { TextField ,Box, Button} from '@material-ui/core';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import React from 'react'
 import {useState} from 'react';
 import { CryptoState } from '../../CryptoContext';
-import {auth} from '../../firebase';
 
 function Signup({handleClose}) {
     const [email, setEmail] = useState("");
@@ -21,7 +18,6 @@ function Signup({handleClose}) {
             });
             return;
         }
-
 
         e.preventDefault();
         console.log(email, password);
@@ -58,30 +54,6 @@ function Signup({handleClose}) {
               return;
             }
         });
-
-
-
-        // try {
-        //   const result = await createUserWithEmailAndPassword(
-        //     auth,
-        //     email,
-        //     password
-        //   );
-        //   setAlert({
-        //     open: true,
-        //     message: `Sign Up Successful. Welcome ${result.user.email}`,
-        //     type: "success",
-        //   });
-    
-        //   handleClose();
-        // } catch (error) {
-        //   setAlert({
-        //     open: true,
-        //     message: error.message,
-        //     type: "error",
-        //   });
-        //   return;
-        // }
     };
 
   return (
@@ -113,13 +85,11 @@ function Signup({handleClose}) {
        <Button
         variant="contained"
         size="large"
-        style={{ backgroundColor: "#EEBC1D" }}
+        style={{ backgroundColor: "#9df9ef" }}
         onClick={handleSubmit}
       >
         Sign Up
       </Button>
-        
-
     </Box>
   )
 }

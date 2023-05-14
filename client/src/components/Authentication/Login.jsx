@@ -1,9 +1,6 @@
-import React from 'react'
 import { useState } from "react";
 import { CryptoState } from "../../CryptoContext";
 import { Box, Button, TextField } from "@material-ui/core";
-import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login({ handleClose }) {
     const [email, setEmail] = useState("");
@@ -58,27 +55,6 @@ function Login({ handleClose }) {
             }
         });
 
-
-
-        // try {
-        //     const result = await signInWithEmailAndPassword(auth, email, password);
-        //     setAlert({
-        //         open: true,
-        //         message: `Login Successful. Welcome ${result.user.email}`,
-        //         type: "success",
-        //     });
-
-        //     handleClose();
-        // } catch (error) {
-        //     setAlert({
-        //         open: true,
-        //         message: error.message,
-        //         type: "error",
-        //     });
-        //     return;
-        // }
-
-
     };
     return (
         <Box
@@ -109,7 +85,7 @@ function Login({ handleClose }) {
                 variant="contained"
                 size="large"
                 onClick={handleSubmit}
-                style={{ backgroundColor: "#EEBC1D" }}
+                style={{ backgroundColor: "#9df9ef" }}
             >
                 Login
             </Button>

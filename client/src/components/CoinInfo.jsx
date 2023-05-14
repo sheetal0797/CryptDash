@@ -48,7 +48,6 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchHistoricData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days]);
 
   const darkTheme = createTheme({
@@ -65,7 +64,7 @@ const CoinInfo = ({ coin }) => {
       <div className={classes.container}>
         {!historicData | flag===false ? (
           <CircularProgress
-            style={{ color: "gold" }}
+            style={{ color: "#9df9ef" }}
             size={250}
             thickness={1}
           />
@@ -86,7 +85,7 @@ const CoinInfo = ({ coin }) => {
                   {
                     data: historicData.map((coin) => coin[1]),
                     label: `Price ( Past ${days} Days ) in ${currency}`,
-                    borderColor: "#EEBC1D",
+                    borderColor: "#9df9ef",
                   },
                 ],
               }}

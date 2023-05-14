@@ -3,11 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { Avatar, Button } from "@material-ui/core";
 import { CryptoState } from "../../CryptoContext";
-import { signOut } from "firebase/auth";
-import { auth, db } from "../../firebase";
 import { numberWithCommas } from "../CoinsTable";
 import { AiFillDelete } from "react-icons/ai";
-import { doc, setDoc } from "firebase/firestore";
 
 const useStyles = makeStyles({
   container: {
@@ -29,14 +26,14 @@ const useStyles = makeStyles({
   logout: {
     height: "8%",
     width: "100%",
-    backgroundColor: "#EEBC1D",
+    backgroundColor: "#9df9ef",
     marginTop: 20,
   },
   picture: {
     width: 200,
     height: 200,
     cursor: "pointer",
-    backgroundColor: "#EEBC1D",
+    backgroundColor: "#9df9ef",
     objectFit: "contain",
   },
   watchlist: {
@@ -60,7 +57,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#EEBC1D",
+    backgroundColor: "#9df9ef",
     boxShadow: "0 0 3px black",
   },
 });
@@ -86,7 +83,6 @@ export default function UserSidebar() {
   };
 
   const logOut = () => {
-    // signOut(auth);
     setUser(null);
     setAlert({
       open: true,
@@ -148,27 +144,6 @@ export default function UserSidebar() {
             console.log("nothing in watchlist");
           }
       })
-
-    // const coinRef = doc(db, "watchlist", user.uid);
-    // try {
-    //   await setDoc(
-    //     coinRef,
-    //     { coins: watchlist.filter((wish) => wish !== coin?.id) },
-    //     { merge: true }
-    //   );
-
-    //   setAlert({
-    //     open: true,
-    //     message: `${coin.name} Removed from the Watchlist !`,
-    //     type: "success",
-    //   });
-    // } catch (error) {
-    //   setAlert({
-    //     open: true,
-    //     message: error.message,
-    //     type: "error",
-    //   });
-    // }
   };
 
   return (
@@ -182,7 +157,7 @@ export default function UserSidebar() {
               width: 38,
               marginLeft: 15,
               cursor: "pointer",
-              backgroundColor: "#EEBC1D",
+              backgroundColor: "#9df9ef",
             }}
             src={user.photoURL}
             alt={user.displayName || user.email}

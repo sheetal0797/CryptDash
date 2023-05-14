@@ -76,12 +76,6 @@ dockerhub=credentials('dockerhub')}
 				ansiblePlaybook(credentialsId: 'devops_ansible', inventory: 'inventory', playbook:'playbook.yml')
 			}
 		}
-		stage("Declarative: Post actions")
-		{
-			steps
-			{ echo "Postt Actions Stage"
-			}
-		}
 	}
 }
 

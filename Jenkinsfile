@@ -10,27 +10,16 @@ dockerhub=credentials('dockerhub')}
 			git url:'https://github.com/sheetal0797/CryptDash.git',branch:'main'
 			}
 		}
-		stage("Mavenn Build")
-		{
-			steps
-			{ 
-		echo "maven"
-			}
-		}
-		stage("Running React Tests (Jest)")
+
+		stage("Running React Tests")
 	 	{
 			steps
 			{
-				echo "running react tests (jest)"
+				echo "running react tests"
+				//sh "npm run test"
 			}
 		}
-		stage("Running API Tests (supertest)")
-		{
-			steps
-			{
-				echo "running API tests (supertest)"
-			}
-		}
+
 		stage("Build CryptDash Backend Docker Image")
 		{
 			steps
@@ -38,7 +27,6 @@ dockerhub=credentials('dockerhub')}
 				echo "build cryptdash backend docker Image"
 				sh "docker build -t sheetalagarwal/cryptdash_server server/"
 			}
-			// { sh "docker build -t sheetalagarwal/devops_pipeline_scical_img ."	}
 		}
 		stage("Build CryptDash Frontend Docker Image")
 		{
@@ -47,7 +35,6 @@ dockerhub=credentials('dockerhub')}
 				echo "build cryptdash frontend docker Image"
 				sh "docker build -t sheetalagarwal/cryptdash_client client/"
 			}
-			// { sh "docker build -t sheetalagarwal/devops_pipeline_scical_img ."	}
 		}
 		stage("Login to Docker Hub")
 		{
@@ -76,7 +63,7 @@ dockerhub=credentials('dockerhub')}
 		stage("Removing Docker Images from Local")
 		{
 			steps
-			{ 	echo "Postt Actions Stage"
+			{ 	echo "Removing Docker Images from Local"
 				sh "docker rmi sheetalagarwal/cryptdash_server"
 				sh "docker rmi sheetalagarwal/cryptdash_client"	
 				}
@@ -85,7 +72,7 @@ dockerhub=credentials('dockerhub')}
 		{
 			steps
 			{
-				echo "Postt Actions Stage"
+				echo "Deploy and Run Images"
 				ansiblePlaybook(credentialsId: 'devops_ansible', inventory: 'inventory', playbook:'playbook.yml')
 			}
 		}

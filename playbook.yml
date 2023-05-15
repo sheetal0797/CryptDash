@@ -14,7 +14,7 @@
     - name: Replace Jinja2 template with decrypted env var into env.yml file
       template:
         src: server/env.j2
-        dest: env.yml
+        dest: env.yaml
 
 
     # Now we actually run the Docker containers 

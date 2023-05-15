@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const { ConnectionOptions } = require('mongoose');
 const yenv = require('yenv')
 
-let env = yenv('env.yml')
+let env = yenv('env.yaml')
 
 // dotenv.config({ path: '.env' });
 

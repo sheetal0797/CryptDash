@@ -19,6 +19,7 @@
     "mongoose": "^7.0.4",
     "supertest": "^6.3.3",
     "winston": "^3.8.2",
-    "winston-elasticsearch": "^0.17.2"
+    "winston-elasticsearch": "^0.17.2",
+    "yenv": "^3.0.1"
   }
 }

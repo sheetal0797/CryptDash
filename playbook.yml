@@ -14,7 +14,7 @@
     - name: Replace Jinja2 template with decrypted env var into env.yml file
       template:
         src: server/env.j2
-        dest: env.yaml
+        dest: .env
 
 
     # Now we actually run the Docker containers 
@@ -24,7 +24,7 @@
       command: docker-compose up -d --build
 
     - name: copy env.yml to server docker container
-      command: docker cp env.yaml cryptdash_server:/usr/src/app/env.yaml
+      command: docker cp .env cryptdash_server:/usr/src/app/.env
 
     - name: Prune the dangling Docker images
       command: docker image prune --force

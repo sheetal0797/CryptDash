@@ -16,14 +16,15 @@
         src: server/env.j2
         dest: env.yml
 
-    - name: copy env.yml to server docker container
-      command: docker cp env.yml cryptdash_server:/usr/src/app/env.yml
 
     # Now we actually run the Docker containers 
     # Detached mode is required, otherwise Jenkins build never exits
     # even though the docker-compose up command has successfully executed
     - name: Run the pulled Docker images in detached mode
       command: docker-compose up -d --build
+
+    - name: copy env.yml to server docker container
+      command: docker cp env.yml cryptdash_server:/usr/src/app/env.yml
 
     - name: Prune the dangling Docker images
       command: docker image prune --force

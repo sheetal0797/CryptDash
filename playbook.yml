@@ -24,7 +24,7 @@
       command: docker-compose up -d --build
 
     - name: copy env.yml to server docker container
-      command: docker cp env.yml cryptdash_server:/usr/src/app/env.yml
+      command: docker cp env.yaml cryptdash_server:/usr/src/app/env.yaml
 
     - name: Prune the dangling Docker images
       command: docker image prune --force

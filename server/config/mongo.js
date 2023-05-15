@@ -1,10 +1,10 @@
 const dotenv = require('dotenv');
 const { ConnectionOptions } = require('mongoose');
-//const yenv = require('yenv')
+const yenv = require('yenv')
 
-//let env = yenv('env.yml')
+let env = yenv('env.yml')
 
- dotenv.config({ path: '.env' });
+// dotenv.config({ path: '.env' });
 
 const mongoOpts = {
     useNewUrlParser: true    

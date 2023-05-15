@@ -73,7 +73,7 @@ dockerhub=credentials('dockerhub')}
 			steps
 			{
 				echo "Deploy and Run Images"
-				ansiblePlaybook(credentialsId: 'devops_ansible', inventory: 'inventory', playbook:'playbook.yml')
+				ansiblePlaybook(credentialsId: 'devops_ansible', inventory: 'inventory', playbook:'playbook.yml', vaultCredentialsId: 'ansible-vault-password')
 			}
 		}
 	}

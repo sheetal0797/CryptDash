@@ -8,8 +8,8 @@ services:
       - "5000:5000"
     links:
       - mongo
-    # volumes:
-    #   - ./server:/usr/src/app
+    volumes:
+      - ./server:/usr/src/app
   client:
     image: sheetalagarwal/cryptdash_client
     container_name: cryptdash_client
@@ -17,8 +17,8 @@ services:
     # stdin_open: true
     ports:
       - "3000:3000"
-    # volumes:
-    #   - ./client:/usr/src/app
+    volumes:
+      - ./client:/usr/src/app
   mongo:
     container_name: mongo
     image: mongo

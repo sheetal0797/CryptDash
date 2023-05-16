@@ -60,7 +60,7 @@ dockerhub=credentials('dockerhub')}
 				sh "docker push sheetalagarwal/cryptdash_client"	
 			}
 		}
-		stage("Removing Docker Images from Local")
+		stage("Removing Docker Images from Local ")
 		{
 			steps
 			{ 	echo "Removing Docker Images from Local"
